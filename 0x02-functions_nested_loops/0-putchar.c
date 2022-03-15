@@ -1,14 +1,21 @@
-#include <unistd.h>
-
+#include "main.h"
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ *main - entry point
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ *Description: prints Holberton followed by a newline
+ *
+ *Return: returns 0(successful)
+ *
  */
-
-int _putchar(char c)
+int main(void)
 {
-	return (write(1, &c, 1));
+	char holbText[9] = "0-putchar";
+	int i;
+
+	for (i = 0; i < 9; i++)
+	{
+		_putchar(holbText[i]);
+	}
+	_putchar('\n');
+	return (0);
 }
