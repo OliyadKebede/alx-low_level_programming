@@ -9,7 +9,7 @@
  */
 int main(void)
 {
-	char holbText[9] = "0-putchar";
+	char holbText[9] = "_putchar";
 	int i;
 
 	for (i = 0; i < 9; i++)
