@@ -10,7 +10,7 @@
 
 int main(void)
 {
-	char h[] = "_putchar";
+	char h[] = "abcdefghi";
 	int s = sizeof(h);
 	int i;
 
