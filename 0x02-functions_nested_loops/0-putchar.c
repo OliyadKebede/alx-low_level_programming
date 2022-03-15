@@ -1,17 +1,24 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * main - prints the string "SoftwareEngineering" from a character array.
- * Return: 0 on success.
+ * main - entry point
+ *
+ * Description: Prints SoftwareEngineering with _putchar
+ *
+ * Return: always 0
  */
+
 int main(void)
 {
-	char c[] = "SoftwareEngineering";
-	int i;
+	int i = 0;
+	char c;
+	char s[] = "SoftwareEngineering\n";
 
-	for (i = 0; i < 9; i++)
+	while (i <= 9)
 	{
-		_putchar(c[i]);
+		c = s[i];
+		_putchar(c);
+		i++;
 	}
-	_putchar('\n');
 	return (0);
 }
