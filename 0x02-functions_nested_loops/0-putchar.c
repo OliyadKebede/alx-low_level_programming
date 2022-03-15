@@ -3,7 +3,7 @@
 /**
  * main - entry point
  *
- * Description: Prints Holberton with _putchar
+ * Description: Prints _putchar with _putchar
  *
  * Return: always 0
  */
@@ -12,7 +12,7 @@ int main(void)
 {
 	int i = 0;
 	char c;
-	char s[] = "Holberton\n";
+	char s[] = "_putchar\n";
 
 	while (i <= 9)
 	{
