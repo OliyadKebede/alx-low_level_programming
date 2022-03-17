@@ -1,16 +1,20 @@
-#include "holberton.h"
+#include "main.h"
 /**
- * main - prints the string "SoftwareEngineering" from a character array.
- * Return: 0 on success.
+ *main - entry point
+ *
+ *Description: prints Holberton followed by a newline
+ *
+ *Return: returns 0(successful)
+ *
  */
 int main(void)
 {
-	char c[] = "SoftwareEngineering";
+	char holbText[9] = "_putchar";
 	int i;
 
 	for (i = 0; i < 9; i++)
 	{
-		_putchar(c[i]);
+		_putchar(holbText[i]);
 	}
 	_putchar('\n');
 	return (0);
