@@ -1,28 +1,27 @@
-  
- ​#​include​ ​<​stdio.h​> 
- ​#​include​ ​<​stdlib.h​> 
- ​#​include​ ​<​string.h​> 
- ​#​include​ ​<​ctype.h​> 
-  
- ​/*​* 
+#​include​ ​<​stdio.h​> 
+​#​include​ ​<​stdlib.h​> 
+#​include​ ​<​string.h​> 
+​#​include​ ​<​ctype.h​> 
+
+​/*​* 
  ​ * main - prints the minimum number of coins 
  ​ * to make change for an amount of money 
  ​ * @argc: n args 
  ​ * @argv: arr args 
  ​ * Return: 0 
  ​ ​*/ 
- ​int​ ​main​(​int​ argc, ​char​ *argv[]) 
- ​{ 
- ​        ​int​ value, c; 
+​int​ ​main​(​int​ argc, ​char​ *argv[]) 
+{ 
+ ​       ​int​ value, c; 
   
- ​        c = ​0​; 
- ​        ​if​ (argc != ​2​) 
- ​        { 
- ​                ​printf​(​"​Error​\n​"​); 
- ​                ​return​ (​1​); 
+ ​       c = ​0​; 
+ ​       ​if​ (argc != ​2​) 
+ ​       { 
+ ​               ​printf​(​"​Error​\n​"​); 
+ ​               ​return​ (​1​); 
  ​        } 
- ​        value = ​atoi​(argv[​1​]); 
- ​        ​if​ (value < ​0​) 
+ ​       value = ​atoi​(argv[​1​]); 
+ ​       ​if​ (value < ​0​) 
  ​        { 
  ​                ​printf​(​"​%d​\n​"​, ​0​); 
  ​                ​return​ (​0​); 
