@@ -1,85 +1,58 @@
-#include <stdlib.h>
+/*
+ * File: 100-change.c
+ */
+
 #include <stdio.h>
-#include "main.h"
-
-
-
-
-
+#include <stdlib.h>
 
 /**
- * coin_count - counts the min coins needed for change
+ * main - Prints the minimum number of coins to
+ *        make change for an amount of money.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
  *
- * @argv: argument vector
- * @count: int to count coins
- * Return: int
+ * Return: If the number of arguments is not exactly one - 1.
+ *         Otherwise - 0.
  */
-int coin_count(char *argv[], int count)
-{
-int sum = 0;
-
-while (!(sum + 25 > atoi(argv[1])))
-{
-sum += 25;
-count++;
-}
-while (!(sum + 10 > atoi(argv[1])))
-{
-sum += 10;
-count++;
-}
-while (!(sum + 5 > atoi(argv[1])))
-{
-sum += 5;
-count++;
-}
-while (!(sum + 2 > atoi(argv[1])))
-{
-sum += 2;
-count++;
-}
-while (!(sum + 1 > atoi(argv[1])))
-{
-sum += 1;
-count++;
-}
-return (count);
-}
-
-
-
-
-
-
-
-
-/**
- * main - prints the min num of coins to make change for an amount of money
- *
- * @argc: argument count
- * @argv: argument vector
- * Return: int
- */
-
-
-
-
-
 int main(int argc, char *argv[])
 {
-int count = 0;
+	int cents, coins = 0;
 
-if (argc != 2)
-{
-printf("Error\n");
-return (1);
-}
-else if (atoi(argv[1]) < 0)
-{
-printf("%d\n", 0);
-return (0);
-}
-count = coin_count(argv, count);
-printf("%d\n", count);
-return (0);
+	if (argc != 2)
+	{
+		printf("Error\n");
+		return (1);
+	}
+
+	cents = atoi(argv[1]);
+
+	while (cents > 0)
+	{
+		coins++;
+		if ((cents - 25) >= 0)
+		{
+			cents -= 25;
+			continue;
+		}
+		if ((cents - 10) >= 0)
+		{
+			cents -= 10;
+			continue;
+		}
+		if ((cents - 5) >= 0)
+		{
+			cents -= 5;
+			continue;
+		}
+		if ((cents - 2) >= 0)
+		{
+			cents -= 2;
+			continue;
+		}
+		cents--;
+	}
+
+	printf("%d\n", coins);
+
+	return (0);
 }
