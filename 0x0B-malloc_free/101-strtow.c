@@ -1,137 +1,84 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * _strcmp - Like strcmp.
- * @s1: string.
- * @s2: string.
- * Return: int.
+ * strtow - char
+ * @str: pointer to string params
+ * Return: char
  */
-int _strcmp(char *s1, char *s2)
+
+char **strtow(char *str)
 {
-	int i = 0;
+	int i = 0, j = 0, k = 0;
+	int len = 0, count = 0;
+	char **f, *col;
 
-
-	while (s1[i] != '\0' && s2[i] != '\0')
+	if (!str || !*str)
 	{
-		if (s1[i] != s2[i])
+		return (NULL);
+	}
+
+	while (*(str + i))
+	{
+		if (*(str + i) != ' ')
 		{
-			return (s1[i] - s2[i]);
+			if (*(str + i + 1) == ' ' || *(str + i + 1) == 0)
+			{
+				count += 1;
+			}
 		}
 		i++;
 	}
-	return (0);
-}
 
-/**
-  * _strlen - Find the lenght of a string.
-  * @s: String.
-  * @i: Position.
-  * Return: The lenght, integer.
-  */
-int _strlen(char *s, int i)
-{
-	int count = 0;
-
-	while (s[i] != ' ' && s[i] != '\0')
+	if (count == 0)
 	{
-		count++;
-		i++;
+		return (NULL);
 	}
-	return (count);
-}
+	count += 1;
+	f = malloc(sizeof(char *) * count);
 
-/**
- * words - Count the numbers of words.
- * @str: String.
- *
- * Return: Number of words.
- */
-int words(char *str)
-{
-	int count = 0, flag = 0;
+	if (!f)
+	{
+		return (NULL);
+	}
+	i = 0;
 
 	while (*str)
 	{
-		if (*str != ' ')
+		while (*str == ' ' && *str)
 		{
-			flag = 1;
+			str++;
 		}
-		else if (flag == 1)
+		len = 0;
+
+		while (*(str + len) != ' ' && *(str + len))
 		{
-			count++;
-			flag = 0;
+			len += 1;
 		}
-		str++;
-	}
-	return (count);
-}
+		len += 1;
+		col = malloc(sizeof(char) * len);
 
-/**
- * _strcpy - Copy elements from a string to another.
- * @s: String.
- * @i: Position.
- * @tmp: Array where it's saved.
- * Return: The array whit the elements.
- */
-char *_strcpy(char *s, int i, char *tmp)
-{
-	int j;
-
-	for (j = 0; s[i] != ' ' && s[i] != '\0'; i++, j++)
-	{
-		tmp[j] = s[i];
-	}
-	tmp[j] = '\0';
-
-	return (tmp);
-}
-
-/**
- * strtow - Extract all the words from an string.
- * @str: String.
- *
- * Return: Array of words.
- */
-char **strtow(char *str)
-{
-
-	int i = 0, j = 0, pos, t;
-	char **tmp;
-
-	if (str == NULL || _strcmp(str, "") || (words(str) == 0))
-	{
-		return (NULL);
-	}
-	tmp = malloc(sizeof(int *) * (words(str) + 1));
-	if (tmp == NULL)
-	{
-		return (NULL);
-	}
-	while (str[i])
-	{
-		if (str[i] != ' ')
+		if (!col)
 		{
-			pos = _strlen(str, i);
-			tmp[j] = malloc(sizeof(char) * (pos + 1));
-			if (tmp[j] == NULL)
+			for (k = j - 1; k >= 0; k--)
 			{
-				for (t = j; t >= 0; t--)
-				{
-					free(tmp[t]);
-				}
-				free(tmp);
-				return (NULL);
+				free(f[k]);
 			}
-			_strcpy(str, i, tmp[j]);
-			j++;
-			i += pos;
+			free(f);
+			return (NULL);
 		}
-		else
+
+		for (k = 0; k < (len - 1);  k++)
 		{
-			i++;
+			*(col + k) = *(str++);
+		}
+		*(col + k) = '\0';
+		*(f + j) = col;
+
+		if (j < (count - 1))
+		{
+			j++;
 		}
 	}
-	tmp[j] = NULL;
-	return (tmp);
-}
+	*(f + j) = NULL;
+	return (f);
+} /*yes*/
