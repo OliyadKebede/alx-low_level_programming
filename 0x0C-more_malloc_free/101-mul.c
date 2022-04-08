@@ -1,156 +1,213 @@
 #include "holberton.h"
-#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
 /**
- * str_len - finds string length
- * @str: input pointer to string
- * Return: length of string
- */
-int str_len(char *str)
+ * add - addition of parcial products
+ * @p: parcial product
+ * @mg: big malloc
+ * @i: size of big malloc - 1
+ * @tp: size of parcial product - 1
+  */
+void add(char *p, char *mg, int i, int tp)
 {
-	int len;
+	int pos = tp, a = 0, b = 0, car = 0, res = 0;
+	int cont = tp, aux = 0;
 
-	for (len = 0; *str != '\0'; len++)
-		len++, str++;
-	return (len / 2);
+	for (; cont >=  0; cont--, i--, pos--)
+	{
+		a = *(p + pos) - '0';
+		b = *(mg + i) - '0';
+		res = (a + b) + car;
+		car = res / 10;
+		res = (res % 10) + '0';
+		*(mg + i) = res;
+	}
+	res = 0;
+	for (aux = i - 1; aux >= 0; aux--)
+	{
+		a = *(mg + aux) - '0';
+		a += a + car;
+		car = a / 10;
+		a = (a % 10) + '0';
+		*(mg + aux) = a;
+	}
 }
 /**
- * _calloc - allocates memory for an array using malloc
- * @bytes: bytes of memory needed per size requested
- * @size: size in bytes of each element
- * Return: pointer to the allocated memory
+ * setiar - fill the pointer with 0
+ * @s: pointer
+ * @a: size of pointer
  */
-void *_calloc(unsigned int bytes, unsigned int size)
+void setiar(char *s, int a)
 {
-	unsigned int i;
+	int i;
+
+	for (i = 0; i < a; i++)
+		s[i] = '0';
+}
+/**
+ * parcial - give the parcial malloc
+ * @a: size one
+ * Return: parcial malloc
+ */
+char *parcial(int a)
+{
+	int i;
 	char *p;
 
-	if (bytes == 0 || size == 0)
+	p = malloc(a);
+	if (!p)
 		return (NULL);
-	if (size >= UINT_MAX / bytes || bytes >= UINT_MAX / size)
-		return (NULL);
-	p = malloc(size * bytes);
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; i < bytes * size; i++)
-		p[i] = 0;
-	return ((void *)p);
+	for (i = 0; i < a; i++)
+		p[i] = '0';
+	return (p);
 }
 /**
- * add_arrays - adds 2 arrays of ints
- * @mul_result: pointer to array with numbers from product
- * @sum_result: pointer to array with numbers from total sum
- * @len_r: length of both arrays
- * Return: void
+ * grande - give big malloc
+ * @a: size one
+ * @b: size two
+ * Return: malloc
  */
-void add_arrays(int *mul_result, int *sum_result, int len_r)
+char *grande(int a, int b)
 {
-	int i = 0, len_r2 = len_r - 1, carry = 0, sum;
+	int i;
+	char *p;
 
-	while (i < len_r)
-	{
-		sum = carry + mul_result[len_r2] + sum_result[len_r2];
-		sum_result[len_r2] = sum % 10;
-		carry = sum / 10;
-		i++;
-		len_r2--;
-	}
+	p = malloc(a + b);
+	if (!p)
+		return (NULL);
+	for (i = 0; i < a + b; i++)
+		p[i] = '0';
+	return (p);
 }
 /**
- * is_digit - checks for digits
- * @c: input character to check for digit
- * Return: 0 failure, 1 success
+ * tama - give the size
+ * @s: string of numbers
+ * Return: size
  */
-int is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	printf("Error\n");
-	return (0);
-}
-/**
- * multiply - multiplies 2 #'s, prints result, must be 2 #'s
- * @num1: factor # 1 (is the smaller of 2 numbers)
- * @len_1: length of factor 1
- * @num2: factor # 2 (is the larger of 2 numbers)
- * @len_2: length of factor 2
- * @len_r: length of result arrays
- * Return: 0 fail, 1 success
- */
-int *multiply(char *num1, int len_1, char *num2, int len_2, int len_r)
-{
-	int i = 0, i1 = len_1 - 1;
-	int i2, product, carry, digit, *mul_result, *sum_result;
-
-	sum_result = _calloc(sizeof(int), (len_r));
-	while (i < len_1)
-	{
-		mul_result = _calloc(sizeof(int), len_r);
-		i2 = len_2 - 1, digit = (len_r - 1 - i);
-		if (!is_digit(num1[i1]))
-			return (NULL);
-		carry = 0;
-		while (i2 >= 0)
-		{
-			if (!is_digit(num2[i2]))
-				return (NULL);
-			product = (num1[i1] - '0') * (num2[i2] - '0');
-			product += carry;
-			mul_result[digit] += product % 10;
-			carry = product / 10;
-			digit--, i2--;
-		}
-		add_arrays(mul_result, sum_result, len_r);
-		free(mul_result);
-	    i++, i1--;
-	}
-	return (sum_result);
-}
-/**
- * print_me - prints my array of the hopeful product here
- * @sum_result: pointer to int array with numbers to add
- * @len_r: length of result array
- * Return: void
- */
-void print_me(int *sum_result, int len_r)
+int tama(char *s)
 {
 	int i = 0;
 
-	while (sum_result[i] == 0 && i < len_r)
+	while (s[i] != '\0')
+	{
 		i++;
-	if (i == len_r)
+	}
+	return (i);
+}
+/**
+ * Perror - print Error with putchar.
+ * Return: Always 0.
+ */
+void Perror(void)
+{
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
+	_putchar('\n');
+	exit(98);
+}
+/**
+ * numero - check if strings have only numbers.
+ * @s: string 1
+ * @a: string 2
+ * Return: Always 1 if not or 0 if only has number.
+ */
+void numero(char *s, char *a)
+{
+	int i = 0, aux = 0;
+
+	while (s[i] != '\0')
+	{
+		if (!(s[i] >= '0' && s[i] <= '9'))
+		{
+			aux = 1;
+			break;
+		}
+		i++;
+	}
+	i = 0;
+	while (a[i] != '\0')
+	{
+		if (!(a[i] >= '0' && a[i] <= '9'))
+		{
+			aux = 1;
+			break;
+		}
+		i++;
+	}
+	if (aux == 1)
+		Perror();
+	if (*s == '0' || *a == '0')
+	{
 		_putchar('0');
-	while (i < len_r)
-		_putchar(sum_result[i++] + '0');
+		_putchar('\n');
+		exit(0);
+	}
+}
+/**
+ * impresion - print the pointer
+ * @s: string.
+ * @a: size of string
+ */
+void impresion(char *s, int a)
+{
+	int i;
+
+	for (i = 0; i < a; i++)
+	{
+		if (!(s[0] == '0' && i == 0))
+			_putchar(s[i]);
+	}
 	_putchar('\n');
 }
 /**
- * main - multiply 2 input #'s of large lengths and print result or print Error
- * @argc: input count of args
- * @argv: input array of string args
- * Return: 0, Success
+ * main - check the code for Holberton School students.
+ * @argv: array of pointers store the arguments
+ * @argc: quantity of arguments
+ * Return: Always 0.
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int len_1, len_2, len_r, temp, *sum_result;
-	char *num1, *num2;
+	int t1, t2, t3, a = 0, b = 0, j = 0, aux = 0, car, g, ind;
+	char *mg, *p, *size1, *size2;
 
 	if (argc != 3)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-	len_1 = str_len(argv[1]), len_2 = str_len(argv[2]);
-	len_r = len_1 + len_2;
-	if (len_1 < len_2)
-		num1 = argv[1], num2 = argv[2];
+		Perror();
 	else
-	{
-		num1 = argv[2], num2 = argv[1];
-		temp = len_2, len_2 = len_1, len_1 = temp;
-	}
-	sum_result = multiply(num1, len_1, num2, len_2, len_r);
-	if (sum_result == NULL)
-		exit(98);
-	print_me(sum_result, len_r);
+	{ numero(argv[1], argv[2]);
+		t1 = tama(argv[1]);
+		t2 = tama(argv[2]);
+		ind = t1 + t2;
+		mg = grande(t1, t2);
+		if (t1 >= t2)
+		{ size1 = argv[1];
+			size2 = argv[2];
+			b = t1 - 1;
+			a = t2 - 1;
+			t3 = t1 + 1; }
+		else
+		{ size1 = argv[2];
+			size2 = argv[1];
+			b = t2 - 1;
+			a = t1 - 1;
+			t3 = t2 + 1; }
+		g = b;
+		p = parcial(t3);
+		j = b + 1;
+		for (; a >= 0; a--, ind--)
+		{ car = 0;
+			b = g;
+			j = g + 1;
+			setiar(p, t3);
+			for (; b >= 0; b--, j--)
+			{ aux = ((size2[a] - '0') * (size1[b] - '0'));
+				aux = aux + car;
+				p[j] = ((aux % 10) + '0');
+				car = aux / 10;	}
+			p[j] = (car + '0');
+			add(p, mg, (ind - 1), (t3 - 1)); }
+		impresion(mg, (t1 + t2)); }
 	return (0);
 }
