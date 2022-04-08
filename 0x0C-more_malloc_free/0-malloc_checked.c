@@ -1,18 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "holberton.h"
+#include <stdlib.h>
 /**
- * malloc_checked - Entry Point
- * @b: input amount
- * Return: pointer to new mem
+ * malloc_checked - Allocates a memory space with stdlib's malloc
+ * @b: Bytes of memory to allocate
+ * Return: Nothing
  */
+
 void *malloc_checked(unsigned int b)
 {
-	void *n;
+	void *out = malloc(b);
 
-	n = malloc(b);
-
-	if (n == NULL)
+	if (out == NULL)
 		exit(98);
-	return (n);
+	return (out);
 }
