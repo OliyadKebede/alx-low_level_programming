@@ -1,20 +1,21 @@
 #include "holberton.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * malloc_checked - Creates an array based on passed in value
- * @b: Value passed in for array creation
- * Return: nothing
- */
+* *malloc_checked - function that allocates memory using malloc
+* @b: unsigned int
+* Return: pointer to a addres
+*/
+
 void *malloc_checked(unsigned int b)
 {
-	void *ptr = NULL;
 
-	ptr = malloc(b);
+	void *a;
 
-	if (ptr == NULL)
+	a = malloc(b);
+
+	if (a == NULL)
 		exit(98);
 
-	return (ptr);
+	return (a);
 }
