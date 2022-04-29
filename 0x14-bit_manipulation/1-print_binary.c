@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 /**
  * print_binary - decimal to binary without use / %
  * @n: the decimal
