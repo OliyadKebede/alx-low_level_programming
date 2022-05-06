@@ -1,10 +1,9 @@
-#ifndef HOLBERTON_H
-#define HOLBERTON_H
+#ifndef FILE_IO
+#define FILE_IO
 
-#include <stdlib.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
-
 #include <unistd.h>
 
 int _putchar(char c);
