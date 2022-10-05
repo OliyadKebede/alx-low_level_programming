@@ -1,28 +1,47 @@
-#include <stdio.h>
+#include "search_algos.h"
 
 /**
- * main - a simple program that outputs 0-9 separated by commas
+ * jump_list - jump searches on singly linked list
+ * @list: pointer to head node
+ * @size: its size
+ * @value: value to search for
  *
- * Return: 0 on success
+ * Return: the node found or NULL
  */
-int main(void)
+listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-	int i;
-	int j;
+	size_t i = 0, j = sqrt(size), k = 0, last_j = 0;
+	listint_t *last = list;
 
-	for (i = 48; i < 57; i++)
+	if (!list)
+		return (NULL);
+
+	while (list->n < value)
 	{
-		for (j = i + 1; j < 58; j++)
+		for (last_j = i, last = list, k = 0; list->next && k < j; k++)
 		{
-			putchar(i);
-			putchar(j);
-			if (i != 56 || j != 57)
-			{
-				putchar(',');
-				putchar(' ');
-			}
+			list = list->next;
+			i++;
 		}
+		printf("Value checked at index [%lu] = [%d]\n", i, list->n);
+		if (!list->next)
+			break;
 	}
-	putchar('\n');
-	return (0);
+
+	if (!list->next)
+		j = last_j;
+	else
+		j = i >= j ? i - j : 0;
+	printf("Value found between indexes [%lu] and [%lu]\n", j, i);
+	i = i >= size ? size - 1 : i;
+	list = last;
+	while (list)
+	{
+		printf("Value checked at index [%lu] = [%d]\n", j, list->n);
+		if (list->n == value)
+			return (list);
+		j++;
+		list = list->next;
+	}
+	return (NULL);
 }
